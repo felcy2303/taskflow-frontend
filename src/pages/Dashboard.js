@@ -62,10 +62,9 @@ function Dashboard() {
     localStorage.removeItem("token");
     navigate("/");
   };
-
-  useEffect(() => {
-    getTodos();
-  }, []);
+useEffect(() => {
+  getTodos();
+}, [token]);
 
   return (
     <div className="dashboard">
