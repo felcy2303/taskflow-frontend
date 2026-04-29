@@ -13,7 +13,7 @@ function Dashboard() {
   const getTodos = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/todos",
+        "http://taskflow-backend-7xaw.onrender.com/api/todos",
         {
           headers: {
             Authorization: token
@@ -32,7 +32,7 @@ function Dashboard() {
     if (!text) return;
 
     await axios.post(
-      "http://localhost:5000/api/todos",
+      "http://taskflow-backend-7xaw.onrender.com/api/todos",
       { text },
       {
         headers: {
@@ -47,7 +47,7 @@ function Dashboard() {
 
   const deleteTodo = async (id) => {
     await axios.delete(
-      `http://localhost:5000/api/todos/${id}`,
+      `http://taskflow-backend-7xaw.onrender.com/api/todos/${id}`,
       {
         headers: {
           Authorization: token
