@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +10,7 @@ function Dashboard() {
 
   const token = localStorage.getItem("token");
 
-  const getTodos = async () => {
+  const getTodos = useCallback(async () => {
     try {
       const res = await axios.get(
         "http://taskflow-backend-7xaw.onrender.com/api/todos",
@@ -26,7 +26,7 @@ function Dashboard() {
     } catch (error) {
       alert("Failed to load tasks");
     }
-  };
+  }, [token]);
 
   const addTodo = async () => {
     if (!text) return;
@@ -64,7 +64,7 @@ function Dashboard() {
   };
 useEffect(() => {
   getTodos();
-}, [token]);
+}, [getTodos]);
 
   return (
     <div className="dashboard">
