@@ -21,7 +21,7 @@ function Register() {
   const handleRegister = async () => {
     try {
       await axios.post(
-        "http://taskflow-backend-7xaw.onrender.com/api/auth/register",
+        "https://taskflow-backend-7xaw.onrender.com/api/auth/register",
         form
       );
 
@@ -29,7 +29,8 @@ function Register() {
       navigate("/");
 
     } catch (error) {
-      alert("Registration Failed");
+      const message = error.response?.data?.message || error.message || "Registration Failed";
+      alert(`Registration Failed: ${message}`);
     }
   };
 

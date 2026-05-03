@@ -20,7 +20,7 @@ function Login() {
   const handleLogin = async () => {
     try {
       const res = await axios.post(
-        "http://taskflow-backend-7xaw.onrender.com/api/auth/login",
+        "https://taskflow-backend-7xaw.onrender.com/api/auth/login",
         form
       );
 
@@ -31,7 +31,8 @@ function Login() {
       navigate("/dashboard");
 
     } catch (error) {
-      alert("Login Failed");
+      const message = error.response?.data?.message || error.message || "Login Failed";
+      alert(`Login Failed: ${message}`);
     }
   };
 

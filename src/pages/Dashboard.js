@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -10,10 +10,10 @@ function Dashboard() {
 
   const token = localStorage.getItem("token");
 
-  const getTodos = async () => {
+  const getTodos = useCallback(async () => {
     try {
       const res = await axios.get(
-        "http://taskflow-backend-7xaw.onrender.com/api/todos",
+        "https://taskflow-backend-7xaw.onrender.com/api/todos",
         {
           headers: {
             Authorization: token
@@ -26,13 +26,13 @@ function Dashboard() {
     } catch (error) {
       alert("Failed to load tasks");
     }
-  };
+  }, [token]);
 
   const addTodo = async () => {
     if (!text) return;
 
     await axios.post(
-      "http://taskflow-backend-7xaw.onrender.com/api/todos",
+      "https://taskflow-backend-7xaw.onrender.com/api/todos",
       { text },
       {
         headers: {
@@ -47,7 +47,7 @@ function Dashboard() {
 
   const deleteTodo = async (id) => {
     await axios.delete(
-      `http://taskflow-backend-7xaw.onrender.com/api/todos/${id}`,
+      `https://taskflow-backend-7xaw.onrender.com/api/todos/${id}`,
       {
         headers: {
           Authorization: token
@@ -64,7 +64,7 @@ function Dashboard() {
   };
 useEffect(() => {
   getTodos();
-}, [token]);
+}, [getTodos]);
 
   return (
     <div className="dashboard">
